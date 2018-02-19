@@ -6,7 +6,7 @@
 <meta content='width=device-width, initial-scale=1.0' name='viewport'>
 <link rel="stylesheet" media="all" href="/public/RemoveBlocks/bootstrap.css" />
 	
-<style >
+<style>
 input
 {
 text-align:center;
@@ -108,6 +108,7 @@ text-align:center;
   margin-left:255px;
 }
 </style>
+	
 <script type="text/javascript">
     'use strict'
 
@@ -281,7 +282,6 @@ text-align:center;
 
             if (seconds % 4 == 0 && Removed.length >= 2 && StartPause.value == "Pause") // Добавление новых кубиков во время игры
             {
-
                 for (var i = 0; i < Math.round(Math.random() * 2); i++) {
                     var ind = Math.round(Math.random() * Removed.length);
                     var blockColor = document.getElementById(Removed[ind]);
@@ -318,9 +318,7 @@ text-align:center;
             PlayerName.value = "Player" + (++NamelessPlayerCount);
         }
 
-
         TableResult.innerHTML += PlayerName.value + ": " + points + "<br/> ";
-
 
         SetData(PlayerName.value, points);
 
@@ -331,13 +329,11 @@ text-align:center;
         PlayerName.value = "";
         score.innerHTML = "Your score: ";
         counter.value = "01:00";
-
     }
 
     function SetData(NAME, points) {
 
         var xhr = new XMLHttpRequest();
-
 
         var body = JSON.stringify({
             "name": NAME,
