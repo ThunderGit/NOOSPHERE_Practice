@@ -1,0 +1,65 @@
+﻿
+<!DOCTYPE html>
+<head>
+<title>How to Play</title>
+<meta charset='utf-8'/>
+<meta content='IE=Edge,chrome=1' http-equiv='X-UA-Compatible'>
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<link rel="stylesheet" media="all" href="/public/RemoveBlocks/bootstrap.css" />
+
+<style>
+h1,p,ul,ol,li,input
+{
+margin-left:10px;
+margin-bottom:10px;
+}
+
+input[type=submit]
+{
+width:190px;
+    background:blue;
+    color:white;    
+    border:1px solid black;
+    cursor:pointer;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; 
+    text-align:center;
+}
+</style>
+
+<script>
+'use strict'
+function BackToGame()
+{
+var forma=document.getElementById('forma1');
+  forma.action="/public/RemoveBlocks/index.html";
+}
+</script>
+
+</head>
+<body>
+<h1>How to Play "Remove Blocks"</h1>
+<ol>
+<li><p>Press the "Start" button to begign the game.</p></li>
+<li><p>150 multicolored blocks will appear on the game filed below. You must remove all of them by hovering mouse cursor on each block and click the left mousebutton to make block dissapear.</p></li>
+
+<li><p> You have 1 minute time limit for removing as many blocks as you can do and get as maximum of points as you can.</p></li>
+<li><p> Removing of each block of certain color gives you different amount of points:</p></li>
+<ul>
+<li><p>Removing <span style="color:red;">Red</span> block gives you 1 point.</p></li>
+<li><p>Removing <span style="color:magenta;">Magenta</span> block gives you 2 points.</p></li>
+<li><p>Removing <span style="color:green;">Green</span> block gives you 5 points.</p></li>
+<li><p>Removing <span style="color:blue;">Blue</span> block gives you 10 points.</p></li>
+<li><p>Removing <span style="color:gold;">Gold</span> block gives you 20 points.</p></li>
+</ul>
+<li><p>Besides, at some point of time a new block can appear in the plece of removed one and the number can be on this block. This number signifies an amount of seconds that will be added to the current left game time. The number of extra seconds variates from -5 to +5 (which means that time can be not only increased but also decreased or even still be unchanged at the current moment).The amount of new blocks can be from 0 to 2.</p></li>
+<li><p>By the time over, the game will be over and you will can type your name to the Result Table where yo can see your name and how much of points you have got.</p></li>
+<li><p>To play new game, just press the "New Game" button for reset the game field and then press the "Start" button.</p></li>
+<li><p>If you want to stop the game, press the "Pause" button (the former "Start" button as you already have started) to freeze the game and timer. To continue the game, press the "Resume" button (former "Pause" button).</p></li>
+<li><p>To discover the game rules and how to play this game, press the "How to Play" button.</p></li>
+</ol>
+<form id="forma1" method="GET"> 
+<input type="submit" value="Back to the Game" id="back" onclick="BackToGame()"/>
+</form>
+</body>
+</html>
