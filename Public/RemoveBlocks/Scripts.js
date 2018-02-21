@@ -54,7 +54,9 @@
             }
             seconds = 60; //Устанавливаем время
             TIMER(); // Включаем таймер
-        } else {
+        }
+         else 
+        {
             if (StartPause.value == "Resume") // Продолжить
             {
                 StartPause.value = "Pause";
@@ -167,7 +169,7 @@
                 score.innerHTML = "Your score: " + (points);
                 gameOverDiv.style.visibility = "visible";
             }
-            if ( blocksCount == 0) // Конец игры (Кубики закончились раньше времени)
+            if (blocksCount == 0) // Конец игры (Кубики закончились раньше времени)
             {
                 StartPause.disabled = true;
                 __NewGame.disabled = true;
