@@ -1,4 +1,4 @@
-﻿    'use strict'
+    'use strict'
 
     var blocksCount = 150; //Количество кубиков на доске
     var points = 0; //Кол-во очков игрока
@@ -8,7 +8,8 @@
     var Color = ["red", "green", "blue", "gold", "magenta"]; //Цвета кубиков
     var Removed = new Array(); //Массив "убранных кубиков"
 
-    function GetRecord() {
+    function GetRecord()//Получить Список рекордов 
+    {
         var TableResult = document.getElementById("record");
         TableResult.innerHTML = "<u><b>Result Table</b></u><br/>";
         var xhr = new XMLHttpRequest();
@@ -138,12 +139,13 @@
     function TIMER() //Таймер 
     {
         var StartPause = document.getElementById("start");
-
+        var __NewGame = document.getElementById("_NewGame");  
 
         var gameOverDiv = document.getElementById("EnterName");
         var score = document.getElementById("result");
 
-        function tick() {
+        function tick() 
+        {
             var counter = document.getElementById("timer");
 
             if (seconds > 0 && StartPause.value == "Pause") // Обратный отсчёт
@@ -153,17 +155,26 @@
                     String(seconds % 60);
             }
 
-            if (seconds >= 0) // Обратный отсчёт, если время не закончилось
+            if (seconds > 0) // Обратный отсчёт, если время не закончилось
             {
                 setTimeout(tick, 1000);
             }
 
-            if (seconds == 0 || blocksCount == 0) // Конец игры
+            if(seconds==0)//Конец игры (Время вышло)
+            {
+            	StartPause.disabled = true;
+            	seconds = -1;
+                score.innerHTML = "Your score: " + (points);
+                gameOverDiv.style.visibility = "visible";
+            }
+            if ( blocksCount == 0) // Конец игры (Кубики закончились раньше времени)
             {
                 StartPause.disabled = true;
-                points += seconds + 1;
+                __NewGame.disabled = true;
+                points+=seconds;
                 seconds = -1;
-                score.innerHTML = "Your score: " + (points);
+                ++points;
+                score.innerHTML = "Your score: " + (points-1);
 
                 gameOverDiv.style.visibility = "visible";
             }
@@ -171,15 +182,18 @@
             if (seconds % 4 == 0 && Removed.length >= 2 && StartPause.value == "Pause") // Добавление новых кубиков во время игры
             {
 
-                for (var i = 0; i < Math.round(Math.random() * 2); i++) {
+                for (var i = 0; i < Math.round(Math.random() * 2); i++) 
+                {
                     var ind = Math.round(Math.random() * Removed.length);
                     var blockColor = document.getElementById(Removed[ind]);
-                    if (blockColor.style.backgroundColor == "white") {
+                    if (blockColor.style.backgroundColor == "white") 
+                    {
                         blockColor.style.backgroundColor = Color[Math.round(Math.random() * 4)];
                         blockColor.style.border = "2px solid black";
                         Removed.splice(ind, 1);
                         ++blocksCount;
-                        if (Math.round(Math.random() * 1) == 1) {
+                        if (Math.round(Math.random() * 1) == 1)
+                        {
                             blockColor.innerHTML = Math.round(Math.random() * 10) - 5;
                         }
 
@@ -190,7 +204,7 @@
             }
         }
 
-        if (seconds >= 0) // Обратный отсчёт, если время не закончилось
+        if (seconds > 0) // Обратный отсчёт, если время не закончилось
         {
             tick();
         }
@@ -202,28 +216,27 @@
         var TableResult = document.getElementById("record");
         var PlayerName = document.getElementById("YourNameText");
         var score = document.getElementById("result");
-
+        var __NewGame=document.getElementById("_NewGame");
         if (PlayerName.value == "") {
             PlayerName.value = "Player" + (++NamelessPlayerCount);
         }
 
 
-        TableResult.innerHTML += PlayerName.value + ": " + points + "<br/> ";
-
-
+        TableResult.innerHTML += PlayerName.value + ": " + (points--) + "<br/> ";
+        
         SetData(PlayerName.value, points);
-
+        //GetRecord();
         //Вернуть начальные настройки
-        var TableResult = document.getElementById("record");
+        __NewGame.disabled=false;
         TableResult.innerHTML = "<u><b>Result Table</b></u><br/>";
         gameOverDiv.style.visibility = "hidden";
         PlayerName.value = "";
         score.innerHTML = "Your score: ";
         counter.value = "01:00";
-
     }
 
-    function SetData(NAME, points) {
+    function SetData(NAME, points) //Записать новый результат
+    {
 
         var xhr = new XMLHttpRequest();
 
@@ -244,7 +257,7 @@
         };
 
         xhr.send(body);
-        GetRecord();
+        
     };
 
     function AboutGame() //Переход к описанию игры
